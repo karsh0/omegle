@@ -16,6 +16,7 @@ export class RoomManager{
     }
 
     createRoom(user1: User, user2: User){
+        console.log('creating room')
         const roomId = this.generate().toLocaleString()
         this.rooms.set(roomId.toString(), {
             user1,
@@ -51,7 +52,7 @@ export class RoomManager{
         }
 
         const senderId = room.user1.socket.id == receiverId ? room.user2 : room.user1
-        senderId.socket.emit("offer",{
+        senderId.socket.emit("answer",{
             sdp,
             roomId
         })

@@ -19,11 +19,14 @@ export class UserManager{
     }
 
     addUser(name: string, socket: Socket){
+        console.log('adding user')
         this.users.push({
             name,
             socket
         })
         this.queue.push(socket.id)
+        this.clearQueue()
+        this.initHandlers(socket);
     }
 
     removeUser(socketId: string){
@@ -53,7 +56,6 @@ export class UserManager{
         }
 
         const room = this.roomManager.createRoom(user1, user2)
-        this.clearQueue()
     }
 
     initHandlers(socket: Socket){
