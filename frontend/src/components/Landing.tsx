@@ -28,18 +28,20 @@ export function Landing() {
             console.error("Error accessing media devices:", err)
         }
     }
+    useEffect(()=>{
+        getCam()
+    },[])
 
     if (!joined) {
         return (
             <div>
                 <h2>Hi</h2>
-                <video autoPlay ref={videoRef}></video>
+                <video className="w-96 h-64 overflow-hidden" autoPlay ref={videoRef}></video>
                 <div>
                     <label>Enter name</label>
                     <input type="text" onChange={(e) => setName(e.target.value)} />
                     <button onClick={() => {
                         setJoined(true)
-                        getCam()
                     }}>Join</button>
                 </div>
             </div>
