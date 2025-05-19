@@ -37,7 +37,7 @@ export class RoomManager{
         if(!room){
             return
         }
-
+        console.log('inside on offer')
         const receiverId = room.user1.socket.id == senderId ? room.user2 : room.user1
         receiverId.socket.emit("offer",{
             sdp,
@@ -56,6 +56,15 @@ export class RoomManager{
             sdp,
             roomId
         })
+    }
+
+    onIceCandidates(roomId: string, senderSocketid: string, candidate: any, type: "sender" | "receiver") {
+        const room = this.rooms.get(roomId);
+        if (!room) {
+            return;
+        }
+        const receivingUser = room.user1.socket.id === senderSocketid ? room.user2: room.user1;
+        receivingUser.socket.emit("add-ice-candidate", ({candidate, type}));
     }
 
     generate(){

@@ -13,10 +13,10 @@ const io = new Server(server,{
 const userManager = new UserManager()
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+        console.log('a user connected');
       userManager.addUser('1', socket)
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
+      socket.on('disconnect', () => {
+        console.log('user disconnected');
       userManager.removeUser(socket.id)
     });
   });
